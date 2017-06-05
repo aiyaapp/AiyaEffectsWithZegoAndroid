@@ -308,9 +308,9 @@ public class BizLivePresenter {
                         }
 
                         // 是否响应我发出的请求
-                        final boolean isRespondToMyRequest = mMyMagic.equals(magic) ? true : false;
+                        final boolean isRespondToMyRequest = mMyMagic.equals(magic);
                         // 是否同意
-                        final boolean isAgree = BizLiveRoomUitl.AGREE_PUBLISH.equals(mapData.get(BizLiveRoomUitl.KEY_CONTENT)) ? true : false;
+                        final boolean isAgree = BizLiveRoomUitl.AGREE_PUBLISH.equals(mapData.get(BizLiveRoomUitl.KEY_CONTENT));
 
                         final String userNameTemp = userNameOfRequest;
                         if (mLiveRoomListener != null && mHandlerLiveRoom != null) {

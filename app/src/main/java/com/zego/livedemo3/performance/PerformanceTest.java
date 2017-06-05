@@ -275,7 +275,7 @@ public class PerformanceTest {
     private String getSystemInfo(){
 
         ActivityManager.MemoryInfo info = new ActivityManager.MemoryInfo();
-        ((ActivityManager)mContext.getSystemService(mContext.ACTIVITY_SERVICE)).getMemoryInfo(info);
+        ((ActivityManager)mContext.getSystemService(Context.ACTIVITY_SERVICE)).getMemoryInfo(info);
 
         String manufacture = Build.MANUFACTURER;
         String model = Build.MODEL;

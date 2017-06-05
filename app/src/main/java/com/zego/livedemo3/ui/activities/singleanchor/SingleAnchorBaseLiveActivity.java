@@ -970,11 +970,7 @@ public abstract class SingleAnchorBaseLiveActivity extends AbsShowActivity {
 
     @OnClick(R.id.tv_speaker)
     public void doMute() {
-        if (mEnableSpeaker) {
-            mEnableSpeaker = false;
-        } else {
-            mEnableSpeaker = true;
-        }
+        mEnableSpeaker = !mEnableSpeaker;
 
         mZegoAVKit.enableSpeaker(mEnableSpeaker);
         tvSpeaker.setSelected(!mEnableSpeaker);

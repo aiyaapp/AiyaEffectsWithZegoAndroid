@@ -15,7 +15,10 @@ import android.os.HandlerThread;
 import android.util.Log;
 
 import com.aiyaapp.camera.sdk.filter.AFilter;
+import com.aiyaapp.camera.sdk.filter.EasyGlUtils;
 import com.aiyaapp.camera.sdk.filter.EffectFilter;
+import com.aiyaapp.camera.sdk.filter.MatrixUtils;
+import com.aiyaapp.camera.sdk.filter.NoFilter;
 import com.zego.livedemo3.advanced.ve_gl.EglBase;
 import com.zego.livedemo3.advanced.ve_gl.GlUtil;
 import com.zego.zegoavkit2.videofilter.ZegoVideoFilter;
@@ -25,15 +28,13 @@ import java.util.ArrayList;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.CountDownLatch;
 
-/**
- * Description:
- */
-public class AiyaFilterDemo extends ZegoVideoFilter{
+public class AiyaFilterDemo extends ZegoVideoFilter {
     private ZegoVideoFilter.Client mClient = null;
     private HandlerThread mThread = null;
     private volatile Handler mHandler = null;
 
     private AFilter mFilter;
+    private AFilter mFlipFilter;            //特效绘制翻转了，利用这个fliter翻转回来
 
     private int mWidth,mHeight;
 
@@ -44,16 +45,21 @@ public class AiyaFilterDemo extends ZegoVideoFilter{
         public long timestamp_100n;
         public ByteBuffer buffer;
     }
-    private ArrayList<AiyaFilterDemo.PixelBuffer> mProduceQueue = new ArrayList<>();
+    private ArrayList<PixelBuffer> mProduceQueue = new ArrayList<>();
     private int mWriteIndex = 0;
     private int mWriteRemain = 0;
-    private ConcurrentLinkedQueue<AiyaFilterDemo.PixelBuffer> mConsumeQueue = new ConcurrentLinkedQueue<>();
+    private ConcurrentLinkedQueue<PixelBuffer> mConsumeQueue = new ConcurrentLinkedQueue<>();
     private int mMaxBufferSize = 0;
 
     private EglBase captureEglBase;
     private int mTextureId = 0;
 
     private Resources res;
+
+    private int[] frame=new int[1];
+    private int[] texture=new int[2];
+
+    private int frameDelayCount=0;      //防止启动时出现灰屏
 
     public AiyaFilterDemo(Resources res) {
         this.res = res;
@@ -62,6 +68,7 @@ public class AiyaFilterDemo extends ZegoVideoFilter{
     @Override
     protected void allocateAndStart(ZegoVideoFilter.Client client) {
         Log.e("aiya","allocateAndStart");
+        frameDelayCount=0;
         mClient = client;
         mThread = new HandlerThread("video-filter");
         mThread.start();
@@ -69,6 +76,8 @@ public class AiyaFilterDemo extends ZegoVideoFilter{
         final CountDownLatch barrier = new CountDownLatch(1);
         mFilter=new EffectFilter(res);
         mFilter.setFlag(1);
+        mFlipFilter=new NoFilter(res);
+        MatrixUtils.flip(mFlipFilter.getMatrix(),true,true);
         mHandler.post(new Runnable() {
             @Override
             public void run() {
@@ -82,9 +91,9 @@ public class AiyaFilterDemo extends ZegoVideoFilter{
                     throw e;
                 }
                 mFilter.create();
+                mFlipFilter.create();
                 GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
                 mTextureId = GlUtil.generateTexture(GLES20.GL_TEXTURE_2D);
-
                 barrier.countDown();
             }
         });
@@ -191,7 +200,12 @@ public class AiyaFilterDemo extends ZegoVideoFilter{
                 if(mWidth!=width||mHeight!=height){
                     mWidth=width;
                     mHeight=height;
+                    GLES20.glDeleteFramebuffers(1,frame,0);
+                    GLES20.glDeleteTextures(2,texture,0);
+                    GLES20.glGenFramebuffers(1,frame,0);
+                    EasyGlUtils.genTexturesWithParameter(2, texture, 0,GLES20.GL_RGBA,mWidth,mHeight);
                     mFilter.setSize(width, height);
+                    mFlipFilter.setSize(width, height);
                 }
                 long start = System.currentTimeMillis();
 
@@ -203,16 +217,29 @@ public class AiyaFilterDemo extends ZegoVideoFilter{
                 pixelBuffer.buffer.position(0);
                 GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGBA, pixelBuffer.width, pixelBuffer.height, 0, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, pixelBuffer.buffer);
 
-                //ToDo: 做美颜处理
-                mFilter.setTextureId(mTextureId);
+                EasyGlUtils.bindFrameTexture(frame[0],texture[0]);
+                mFlipFilter.setTextureId(mTextureId);
+                mFlipFilter.draw();
+                EasyGlUtils.unBindFrameBuffer();
+
+                //哎吖特效处理
+                mFilter.setTextureId(texture[0]);
                 mFilter.draw();
+
+                EasyGlUtils.bindFrameTexture(frame[0],texture[1]);
+                mFlipFilter.setTextureId(mFilter.getOutputTexture());
+                mFlipFilter.draw();
+                EasyGlUtils.unBindFrameBuffer();
+
+                Log.d("zego","draw");
+
                 // 将处理后的数据回传到zego引擎
                 GLES20.glEnable(GLES20.GL_BLEND);
-                mClient.onProcessCallback(mFilter.getOutputTexture(), pixelBuffer.width, pixelBuffer.height, pixelBuffer.timestamp_100n);
-
+                mClient.onProcessCallback(frameDelayCount<5?mTextureId:texture[1], pixelBuffer.width, pixelBuffer.height, pixelBuffer.timestamp_100n);
+                if(frameDelayCount<5)frameDelayCount++;
                 long end = System.currentTimeMillis();
 
-                Log.i("Hybrid", "time:" + (end - start));
+                Log.d("zego", "time:" + (end - start));
 
                 returnProducerPixelBuffer(pixelBuffer);
             }
@@ -254,6 +281,8 @@ public class AiyaFilterDemo extends ZegoVideoFilter{
             if (mTextureId != 0) {
                 int[] textures = new int[] {mTextureId};
                 GLES20.glDeleteTextures(1, textures, 0);
+                GLES20.glDeleteFramebuffers(1,frame,0);
+                GLES20.glDeleteTextures(2,texture,0);
                 mTextureId = 0;
             }
 

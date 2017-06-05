@@ -124,7 +124,7 @@ public class ZegoApiManager {
 
         initUserInfo();
 
-        // 开发者根据需求定制
+        // 开发者根据需求定制，**一定要在init之前**
         openAndvancedFunctions(res);
 
         // 初始化sdk

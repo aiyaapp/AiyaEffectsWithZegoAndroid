@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.1"
 
     defaultConfig {
         applicationId "com.aiyaapp.aiya"
-        minSdkVersion 15
-        targetSdkVersion 23
+        minSdkVersion 18
+        targetSdkVersion 25
         versionCode 30
         versionName getDemoVersion()
 
@@ -77,6 +77,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.tencent.bugly:crashreport:2.2.2'
     //compile project(':AiyaEffectsAndroid:AiyaCameraSDK')
-    compile 'com.github.aiyaapp:AiyaEffectsAndroid:v2.0.0'
+    compile 'com.github.aiyaapp:AiyaEffectsAndroid:v3.0.0'
     compile 'com.tencent.bugly:nativecrashreport:3.0'
 }

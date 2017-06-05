@@ -40,11 +40,7 @@ public class SystemUtil {
 
         for (ActivityManager.RunningAppProcessInfo appProcess : appProcesses) {
             if (appProcess.processName.equals(ZegoApplication.sApplicationContext.getPackageName())) {
-                if (appProcess.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return appProcess.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND;
             }
         }
         return false;

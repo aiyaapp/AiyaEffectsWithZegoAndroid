@@ -5,8 +5,8 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.aiyaapp.camera.sdk.AiyaEffects;
-import com.aiyaapp.camera.sdk.base.State;
-import com.aiyaapp.camera.sdk.base.StateObserver;
+import com.aiyaapp.camera.sdk.base.ActionObserver;
+import com.aiyaapp.camera.sdk.base.Event;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.zego.livedemo3.presenters.BizLivePresenter;
 import com.zego.livedemo3.utils.PreferenceUtil;
@@ -27,19 +27,19 @@ public class ZegoApplication extends Application{
 
 
 
-        final StateObserver observer = new StateObserver() {
+        final ActionObserver observer = new ActionObserver() {
             @Override
-            public void onStateChange(State state) {
-                if (state == State.RESOURCE_FAILED) {
+            public void onAction(Event state) {
+                if (state.eventType == Event.RESOURCE_FAILED) {
                     com.aiyaapp.camera.sdk.base.Log.e("resource failed");
-                } else if (state == State.RESOURCE_READY) {
+                } else if (state.eventType == Event.RESOURCE_READY) {
                     com.aiyaapp.camera.sdk.base.Log.e("resource ready");
-                } else if (state == State.INIT_FAILED) {
+                } else if (state.eventType == Event.INIT_FAILED) {
                     com.aiyaapp.camera.sdk.base.Log.e("init failed");
                     Toast.makeText(ZegoApplication.this, "注册失败，请检查网络", Toast.LENGTH_SHORT)
                             .show();
                     AiyaEffects.getInstance().unRegisterObserver(this);
-                } else if (state == State.INIT_SUCCESS) {
+                } else if (state.eventType == Event.INIT_SUCCESS) {
                     com.aiyaapp.camera.sdk.base.Log.e("init success");
                     AiyaEffects.getInstance().unRegisterObserver(this);
                 }
