@@ -57,6 +57,12 @@ android {
     }
 }
 
+repositories{
+    flatDir{
+        dirs "libs"
+    }
+}
+
 
 def getDemoVersion(){
     File sdk_version_file = file("../bugly_demo_version.txt")
@@ -77,6 +83,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.tencent.bugly:crashreport:2.2.2'
     //compile project(':AiyaEffectsAndroid:AiyaCameraSDK')
-    compile 'com.github.aiyaapp:AiyaEffectsAndroid:v3.0.0'
     compile 'com.tencent.bugly:nativecrashreport:3.0'
+    compile (name:"AiyaEffectsSDK-v3.2.0",ext:"aar")
 }
