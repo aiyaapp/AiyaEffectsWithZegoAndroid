@@ -84,5 +84,5 @@ dependencies {
     compile 'com.tencent.bugly:crashreport:2.2.2'
     //compile project(':AiyaEffectsAndroid:AiyaCameraSDK')
     compile 'com.tencent.bugly:nativecrashreport:3.0'
-    compile (name:"AiyaEffectsSDK-v3.2.0",ext:"aar")
+    compile (name:"AiyaEffectsSDK-v3.3.0",ext:"aar")
 }
