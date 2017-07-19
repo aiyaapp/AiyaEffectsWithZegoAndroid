@@ -10,6 +10,8 @@
 
 [Android版集成到ZegoLive的示例](https://github.com/aiyaapp/AiyaEffectsWithZegoAndroid)
 
+[Android版集成到ZegoLive5的示例](https://github.com/aiyaapp/AiyaEffectsWithZego5Android)
+
 [IOS版集成到金山云的示例](https://github.com/aiyaapp/AiyaEffectsWithKSVCIOS)
 
 [IOS版集成到ZegoLive的示例](https://github.com/aiyaapp/AiyaEffectsWithZegoIOS)
