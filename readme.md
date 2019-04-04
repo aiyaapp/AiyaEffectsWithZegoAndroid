@@ -1,20 +1,19 @@
-# 说明
-在Zegolive SDK中集成特效AiyaEffectsSDK
 
-# 更多
-[Android版AiyaEffectsSDK](https://github.com/aiyaapp/AiyaEffectsAndroid)
+# 宝宝特效 AiyaEffectsSDK android 集成zego示例
 
-[IOS版AiyaEffectsSDK](https://github.com/aiyaapp/AiyaEffectsIOS)
+## 1. 概述
+[AiyaEffectsSDK Android](https://github.com/aiyaapp/AiyaEffectsAndroid) 集成zego示例
 
-[Android版集成到金山云的示例](https://github.com/aiyaapp/AiyaEffectsWithKSVCAndroid)
+## 2. 下载工程
+* 从[github下载](https://github.com/aiyaapp/AiyaEffectsWithZegoAndroid)
+* 从[oschina下载](http://git.oschina.net/wangyng/AiyaEffectsWithZegoAndroid)
 
-[Android版集成到ZegoLive的示例](https://github.com/aiyaapp/AiyaEffectsWithZegoAndroid)
+## 3. 注意事项
+* [即构版本 zego5](https://github.com/zegodev/ZegoLiveDemo5)
 
-[Android版集成到ZegoLive5的示例](https://github.com/aiyaapp/AiyaEffectsWithZego5Android)
+## 4. 反馈与建议
+- 主页: [宝宝特效](http://www.lansear.cn/product/bbtx)
+- 邮箱: <liudawei@aiyaapp.com>
+- QQ讨论群: 650242833
 
-[IOS版集成到金山云的示例](https://github.com/aiyaapp/AiyaEffectsWithKSVCIOS)
-
-[IOS版集成到ZegoLive的示例](https://github.com/aiyaapp/AiyaEffectsWithZegoIOS)
-
-# 联系方式
-邮箱: <liudawei@aiyaapp.com>
+<a href="http://www.lansear.cn/product/bbtx"><img src="doc/logo.png" border="0" alt="宝宝特效" /></a>

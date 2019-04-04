@@ -2,6 +2,8 @@
 
 buildscript {
     repositories {
+        //maven { url "http://192.168.1.229:8081/repository/maven-public/" }
+        mavenCentral()
         jcenter()
     }
     dependencies {
@@ -12,20 +14,30 @@ buildscript {
     }
 }
 
-
-ext{
-    vCode=20
-    vName="v2.0.0"
-}
-
-
 allprojects {
     repositories {
+        //maven { url "http://192.168.1.229:8081/repository/maven-public/" }
+        mavenCentral()
         jcenter()
-        maven { url 'https://jitpack.io'}
+        // ---------- 哎吖科技添加 开始 ----------
+        maven { url "https://dl.bintray.com/aiyaapp/sdk" }
+        // ---------- 哎吖科技添加 结束 ----------
     }
+}
+
+ext {
+    vCode = 4008
+    vName = "v4.0.8"
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+ext {
+    buildToolsVersion = "25.0.2"
+    supportLibVersion = "25.0.0"
+    runnerVersion = "0.5"
+    rulesVersion = "0.5"
+    espressoVersion = "2.2.2"
 }

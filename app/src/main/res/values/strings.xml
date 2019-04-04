@@ -1,5 +1,5 @@
 <resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
-    <string name="app_name">AiyaSDK(ZegoLive)</string>
+    <string name="app_name">LiveDemo5</string>
     <string name="action_settings">Settings</string>
 
     <string name="recent">刚刚</string>
@@ -71,16 +71,17 @@
     <string name="please_wait">请稍后...</string>
 
     <string name="live_quality">当前质量:&#160;<xliff:g id="value">%1$s</xliff:g></string>
+    <string name="live_quality_fps_and_bitrate">;&#160;帧率:<xliff:g id="fps">%1$.2f</xliff:g>;&#160;比特率:<xliff:g id="bitrate">%2$.2f</xliff:g>Kb/s</string>
     <string name="full_screen">全屏播放</string>
     <string name="exit_full_screen">退出全屏</string>
     <string name="allow_camera_permission">请开启摄像头权限</string>
     <string name="open_recorder_permission">请开启录音权限</string>
     <string name="share">分享</string>
     <string name="cancel">取消</string>
-    <string name="game_live_mode">游戏直播</string>
     <string name="mix_stream_mode">混流模式</string>
     <string name="more_anchors_mode">连麦模式</string>
     <string name="single_anchor_mode">单主播模式</string>
+    <string name="game_live_mode">游戏直播</string>
     <string name="play_mixstream">播放混流</string>
 
     <string name="external_capture">外部采集</string>
@@ -89,4 +90,9 @@
     <string name="hardware_encode">硬件编码</string>
     <string name="hardware_decode">硬件解码</string>
     <string name="rate_control">码率控制</string>
+    <string name="preview_mirror">预览镜像</string>
+    <string name="capture_mirror">采集镜像</string>
+
+    <string name="message_can_not_be_empty">消息不能为空!</string>
+    <string name="me">我</string>
 </resources>

@@ -15,9 +15,6 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
-
-#-keep class com.zego.zegoavkit2.**{*;}
-#-keep class com.zego.ve.**{*;}
 -keep class com.zego.**{*;}
 -keep class com.google.**{*;}
 

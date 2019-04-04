@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.zego.livedemo3">
+          package="com.zego.livedemo5">
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.READ_LOGS"/>
@@ -26,7 +26,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
     <application
-        android:name="com.zego.livedemo3.ZegoApplication"
+        android:name=".ZegoApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -46,38 +46,45 @@
         </activity>
 
         <activity
-            android:name="com.zego.livedemo3.ui.activities.externalrender.ExternalRenderPlayActivity"
+            android:name="com.zego.livedemo5.ui.activities.singleanchor.SingleAnchorPlayActivity"
+            android:windowSoftInputMode="stateHidden"
             android:configChanges="orientation|screenSize"/>
 
         <activity
-            android:name="com.zego.livedemo3.ui.activities.singleanchor.SingleAnchorPlayActivity"
-            android:configChanges="orientation|screenSize"/>
-
-        <activity
-            android:name="com.zego.livedemo3.ui.activities.singleanchor.SingleAnchorPublishActivity"
+            android:name="com.zego.livedemo5.ui.activities.singleanchor.SingleAnchorPublishActivity"
+            android:windowSoftInputMode="stateHidden"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name="com.zego.livedemo3.ui.activities.moreanchors.MorAnchorsPlayActivity"
-            android:configChanges="orientation|screenSize" />
-
-        <activity
-            android:name="com.zego.livedemo3.ui.activities.moreanchors.MorAnchorsPublishActivity"
+            android:name=".ui.activities.moreanchors.MoreAnchorsPublishActivity"
+            android:windowSoftInputMode="stateHidden"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name="com.zego.livedemo3.ui.activities.mixstream.MixStreamPlayActivity"
-            android:configChanges="orientation|screenSize" />
+            android:name=".ui.activities.moreanchors.MoreAnchorsPlayActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:configChanges="orientation|screenSize"/>
 
         <activity
-            android:name="com.zego.livedemo3.ui.activities.mixstream.MixStreamPublishActivity"
+            android:name=".ui.activities.mixstream.MixStreamPublishActivity"
+            android:windowSoftInputMode="stateHidden"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
 
         <activity
-            android:name="com.zego.livedemo3.ui.activities.AboutZegoActivity"
+            android:name=".ui.activities.mixstream.MixStreamPlayActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:configChanges="orientation|screenSize"/>
+
+        <activity
+            android:name=".ui.activities.externalrender.ExternalRenderPlayActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:configChanges="orientation|screenSize"/>
+
+        <activity
+            android:name=".ui.activities.AboutZegoActivity"
             android:screenOrientation="portrait"/>
 
         <activity
@@ -101,14 +108,16 @@
         <activity
             android:name="com.tencent.connect.common.AssistActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            />
 
         <activity android:name=".ui.activities.gamelive.GameLiveActivity"
                   android:configChanges="orientation|screenSize"
-                android:screenOrientation="portrait"/>
+                  android:screenOrientation="portrait"/>
         <activity android:name=".ui.activities.gamelive.GameLivingPlayActivity"
                   android:configChanges="orientation|screenSize"
             />
+
 
     </application>
 

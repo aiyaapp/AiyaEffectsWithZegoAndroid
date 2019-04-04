@@ -38,7 +38,7 @@
     <string-array name="beauties">
         <item>无美颜</item>
         <item>磨皮</item>
-        <item>哎吖特效</item>       <!--全屏美白-->
+        <item>全屏美白</item>
         <item>磨皮+全屏美白</item>
         <item>磨皮+皮肤美白</item>
     </string-array>
